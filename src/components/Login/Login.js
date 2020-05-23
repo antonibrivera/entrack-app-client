@@ -10,15 +10,16 @@ export default class Login extends React.Component {
     error: null
   }
 
-  loginUser = (ev) => {
+  loginUserWithJwt = (ev) => {
     ev.preventDefault()
     const { username, password } = ev.target
     AuthApiServices.postLogin({ username: username.value, password: password.value })
       .then(res => {
-        console.log(res)
+        if (res.error) return this.setState({ error: res.error })
         username.value = ''
         password.value = ''
-        TokenServices.saveAuthToken(res.auth_token)
+        TokenServices.saveAuthToken(res.authToken)
+        this.setState({ username: '', password: '', error: null })
       })
       .catch(res => {
         this.setState({ error: res.error })
@@ -26,12 +27,14 @@ export default class Login extends React.Component {
   }
 
   render() {
+    const { error } = this.state
     return (
       <section className="login-form-container">
         <header>
           <h1>Login to my Account</h1>
         </header>
-        <form className="login-form" onSubmit={ev => this.loginUser(ev)}>
+        { error && <p>{error}</p> }
+        <form className="login-form" onSubmit={ev => this.loginUserWithJwt(ev)}>
           <label htmlFor="username"></label>
           <input type="text" name="username" id="username" placeholder="demouser" onChange={ev => this.setState({ username: ev.target.value })} required></input>
           <label htmlFor="password"></label>
