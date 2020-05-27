@@ -20,6 +20,7 @@ export default class Login extends React.Component {
         password.value = ''
         TokenServices.saveAuthToken(res.authToken)
         this.setState({ username: '', password: '', error: null })
+        this.props.history.push('/dashboard')
       })
       .catch(res => {
         this.setState({ error: res.error })
