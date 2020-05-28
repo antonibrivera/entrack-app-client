@@ -9,6 +9,8 @@ import LandingPage from './components/LandingPage/LandingPage';
 import NotFound from './components/NotFound/NotFound';
 import Settings from './components/Settings/Settings';
 import { Switch, Route } from 'react-router-dom';
+import PrivateRoute from './components/Utils/PrivateRoute';
+import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
 
 class App extends React.Component {
   render() {
@@ -19,12 +21,12 @@ class App extends React.Component {
         </header>
         <Switch>
           <Route exact path='/' component={LandingPage}/>
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/sign-up' component={SignUp} />
-          <Route exact path='/settings' component={Settings} />
-          <Route path='/dashboard' component={Dashboard} />
-          <Route path='/create-task' component={CreateTask} />
-          <Route path='/create-preset' component={CreatePresetTask} />
+          <PublicOnlyRoute exact path='/login' component={Login} />
+          <PublicOnlyRoute exact path='/sign-up' component={SignUp} />
+          <PrivateRoute exact path='/settings' component={Settings} />
+          <PrivateRoute path='/dashboard' component={Dashboard} />
+          <PrivateRoute path='/create-task' component={CreateTask} />
+          <PrivateRoute path='/create-preset' component={CreatePresetTask} />
           <Route component={NotFound} />
         </Switch>
       </div>
