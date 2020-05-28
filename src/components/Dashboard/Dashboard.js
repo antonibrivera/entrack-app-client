@@ -1,6 +1,8 @@
 import React from 'react';
 import './Dashboard.css';
 import TaskServices from '../../services/task-services';
+import TaskItem from '../TaskItem/TaskItem';
+import StateContext from '../Utils/StateContext';
 import { Link } from 'react-router-dom';
 export default class Dashboard extends React.Component {
   state={
@@ -32,23 +34,36 @@ export default class Dashboard extends React.Component {
       const hours = (!task.duration.hours) ? 0 : task.duration.hours
       const minutes = (!task.duration.minutes) ? 0 : task.duration.minutes
       const date = this.generateTaskDate(task.task_date)
-      return <li>
-        <h3>{task.task_name}</h3>
-        <p>{hours} hours and {minutes} minutes</p>
-        <p>{task.description}</p>
-        <p>{date}</p>
-      </li>
+      return <TaskItem key={task.id} id={task.id} task={task} hours={hours} minutes={minutes} date={date} />
     })
   }
 
+  handleEditTask(taskId) {
+    
+  }
+
+  handleDeleteTask(taskId) {
+    TaskServices.deleteTask(taskId)
+      .then(res => {
+        if (res.error) this.setState({ error: res.error })
+        window.location.reload(false)
+      })
+  }
+
   render() {
+    const { error } = this.state
     return (
-      <div>
-        <Link to='/create-task'>Add Task</Link>
-        <ul>
-          {this.generateTasksList()}
-        </ul>
-      </div>
+      <StateContext.Provider value={{
+        handleDeleteTask: this.handleDeleteTask
+      }}>
+        <div>
+          <Link to='/create-task'>Add Task</Link>
+          { (error) && <p>{error}</p> }
+          <ul>
+            {this.generateTasksList()}
+          </ul>
+        </div>
+      </StateContext.Provider>
     )
   }
 }

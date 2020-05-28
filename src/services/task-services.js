@@ -22,6 +22,28 @@ const TaskServices = {
     .then(res => (
       (res.error) ? res.error : res.json()
     ))
+  },
+  deleteTask(taskId) {
+    return fetch(`${config.API_ENDPOINT}/tasks/${taskId}`, {
+      method: 'DELETE',
+      headers: {'Authorization': `bearer ${TokenServices.getAuthToken()}`}
+    })
+    .then(res => (
+      (res.error) ? res.error : res.json()
+    ))
+  },
+  editTask(taskId, updatedTask) {
+    return fetch(`${config.API_ENDPOINT}/tasks/${taskId}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `bearer ${TokenServices.getAuthToken()}`,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(updatedTask)
+    })
+    .then(res => (
+      (res.error) ? res.error : res.json()
+    ))
   }
 }
 
