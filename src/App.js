@@ -5,7 +5,7 @@ import SignUp from './components/SignUp/SignUp';
 import Dashboard from './components/Dashboard/Dashboard';
 import CreateTask from './components/CreateTask/CreateTask';
 import EditTask from './components/EditTask/EditTask';
-import CreatePresetTask from './components/CreatePresetTask/CreatePresetTask'
+import EditPresetTask from './components/EditPresetTask/EditPresetTask';
 import LandingPage from './components/LandingPage/LandingPage';
 import NotFound from './components/NotFound/NotFound';
 import Settings from './components/Settings/Settings';
@@ -28,7 +28,7 @@ export default class App extends React.Component {
           <PrivateRoute path='/dashboard' component={Dashboard} />
           <PrivateRoute path='/task/create' component={CreateTask} />
           <PrivateRoute path='/task/edit' component={EditTask} />
-          <PrivateRoute path='/preset/create' component={CreatePresetTask} />
+          <PrivateRoute path='/preset/edit' component={EditPresetTask} />
           <Route component={NotFound} />
         </Switch>
       </div>

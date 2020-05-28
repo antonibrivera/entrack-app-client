@@ -4,6 +4,11 @@
 }
 
 .create-task-container input,
-.create-task-container textarea {
+.create-task-container textarea,
+.create-task-container select {
   display: block;
+}
+
+.create-task-container button {
+  margin: 10px;
 }

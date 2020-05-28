@@ -17,6 +17,7 @@ export default class Dashboard extends React.Component {
           ? this.setState({ error: tasks.error })
           : this.setState({ tasks })
       ))
+      .catch(res => this.setState({ error: res.error }))
   }
 
   generateTaskDate(date) {

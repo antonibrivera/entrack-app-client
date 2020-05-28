@@ -1,6 +1,9 @@
 import React from 'react';
 import './CreateTask.css';
 import TaskServices from '../../services/task-services';
+import PresetTaskServices from '../../services/preset-task-services';
+import PresetOption from '../PresetOption/PresetOption';
+import { Link } from 'react-router-dom';
 
 export default class CreateTask extends React.Component {
   state = {
@@ -8,10 +11,97 @@ export default class CreateTask extends React.Component {
     hours: 0,
     minutes: 30,
     task_date: null,
-    error: null
+    error: null,
+    presetTasks: [],
+    presetId: null
   }
 
-  handleAddTask(ev) {
+  componentDidMount() {
+    return this.getPresetTasks()
+  }
+
+  getPresetTasks() {
+    return PresetTaskServices.getAllPresetTasks()
+      .then(presetTasks => {
+        if (presetTasks.error) return this.setState({ error: presetTasks.error })
+        this.setState({ presetTasks })
+      })
+      .catch(res => this.setState({ error: res.error }))
+  }
+
+  generateDurationPreview(time) {
+    const hours = (!time.hours) ? 0 : time.hours
+    const minutes = (!time.minutes) ? 0 : time.minutes
+    return `${hours} hr, ${minutes} min`
+  }
+
+  generatePresetOptions() {
+    const { presetTasks } = this.state
+    return (
+      <div>
+        <header>
+          <h2>Choose a Preset Task</h2>
+        </header>
+        <form className="preset-task-form">
+          <select name="presetId" onChange={ev => this.setState({ presetId: ev.target.value })}>
+            <option value='' hidden>Select a Preset</option>
+            {presetTasks.map(task => {
+              return <PresetOption key={task.id} id={task.id} task_name={task.task_name} duration={task.duration} genPreview={this.generateDurationPreview} />
+            })}
+          </select>
+          <label htmlFor="preset_task_date">Task Date</label>
+          <input type="date" name="preset_task_date" id="preset_task_date" required onChange={ev => this.setState({ task_date: ev.target.value })} />
+          <button onClick={ev => this.handleAddPresetTask(ev)}>Add Task</button>
+          <button onClick={ev => this.handleDeletePresetTask(ev)}>Delete Preset</button>
+          <Link to={{
+            pathname: '/preset/edit',
+            state: {
+              id: this.state.presetId
+            }
+          }}>
+            <button>Edit Preset</button>
+          </Link>
+        </form>
+      </div>
+    )
+  }
+
+  handleDeletePresetTask(ev) {
+    ev.preventDefault()
+    const { presetId } = this.state
+    PresetTaskServices.deletePresetTask(presetId)
+      .then(res => {
+        if (res.error) this.setState({ error: res.error })
+        window.location.reload(false)
+      })
+  }
+
+  handleAddPresetTask(ev) {
+    ev.preventDefault()
+    const { presetTasks, presetId, task_date } = this.state
+    const presetTask = presetTasks.find(task => task.id == presetId)
+    const { task_name, description } = presetTask
+    const hours = (!presetTask.duration.hours) ? 0 : presetTask.duration.hours
+    const minutes = (!presetTask.duration.minutes) ? 0 : presetTask.duration.minutes
+    const duration = `${hours}:${minutes}`
+    const presetTaskToAdd = { task_name, duration, description, task_date }
+    TaskServices.addTask(presetTaskToAdd)
+      .then(res => {
+        if (res.error) return this.setState({ error: res.error })
+        this.setState({
+          task_name: '',
+          duration: null,
+          hours: 0,
+          minutes: 30,
+          task_date: null,
+          error: null
+        })
+        this.props.history.push('/dashboard')
+      })
+      .catch(res => this.setState({ error: res.error }))
+  }
+
+  handleAddNewTask(ev) {
     ev.preventDefault()
     const { task_name, hours, minutes, description, task_date } = this.state
     const duration = `${hours}:${minutes}`
@@ -32,15 +122,37 @@ export default class CreateTask extends React.Component {
       .catch(res => this.setState({ error: res.error }))
   }
 
+  handleAddNewPresetTask(ev) {
+    ev.preventDefault()
+    const { task_name, hours, minutes, description } = this.state
+    const duration = `${hours}:${minutes}`
+    const presetTaskToAdd = { task_name, duration, description }
+    PresetTaskServices.addPresetTask(presetTaskToAdd)
+      .then(res => {
+        if (res.error) return this.setState({ error: res.error })
+        this.setState({
+          task_name: '',
+          duration: null,
+          hours: 0,
+          minutes: 30,
+          task_date: null,
+          error: null
+        })
+        window.location.reload(false)
+      })
+      .catch(res => this.setState({ error: res.error }))
+  }
+
   render() {
-    const { hours, minutes, error } = this.state
+    const { hours, minutes, error, presetTasks } = this.state
     return (
       <section className="create-task-container">
+        {(presetTasks.length !== 0) ? this.generatePresetOptions() : null}
         <header>
-          Create a New Task
+          <h2>Create a New Task</h2>
         </header>
         { error && <p>{error}</p> }
-        <form onSubmit={ev => this.handleAddTask(ev)}>
+        <form className="new-task-form">
           <label htmlFor="task_name">Task Name</label>
           <input type="text" name="task_name" id="task_name" required onChange={ev => this.setState({ task_name: ev.target.value })} />
           <label htmlFor="hours">Hours</label>
@@ -49,10 +161,14 @@ export default class CreateTask extends React.Component {
           <input type="number" name="minutes" id="minutes" min="0" max="59" value={minutes} required onChange={ev => this.setState({ minutes: ev.target.value })} />
           <label htmlFor="description">Description</label>
           <textarea name="description" id="description" onChange={ev => this.setState({ description: ev.target.value })} />
-          <label htmlFor="task_date">Task Date</label>
-          <input type="date" name="task_date" id="task_date" required onChange={ev => this.setState({ task_date: ev.target.value })} />
-          <button type="submit">Add Task</button>
+          <label htmlFor="new_task_date">Task Date</label>
+          <input type="date" name="new_task_date" id="new_task_date" required onChange={ev => this.setState({ task_date: ev.target.value })} />
+          <button onClick={ev => this.handleAddNewTask(ev)}>Add Task</button>
+          <button onClick={ev => this.handleAddNewPresetTask(ev)}>Create Preset</button>
         </form>
+        <Link to='/dashboard'>
+          <button>Go Back</button>
+        </Link>
       </section>
     )
   }
