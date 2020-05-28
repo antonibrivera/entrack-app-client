@@ -1,9 +1,9 @@
 import config from '../config';
 import TokenServices from './token-services';
 
-const TaskServices = {
-  getAllTasks() {
-    return fetch(`${config.API_ENDPOINT}/tasks`, {
+const PresetTaskServices = {
+  getAllPresetTasks() {
+    return fetch(`${config.API_ENDPOINT}/preset-tasks`, {
       headers: {'Authorization': `bearer ${TokenServices.getAuthToken()}`}
     })
     .then(res => (
@@ -11,15 +11,15 @@ const TaskServices = {
     ))
   },
   getById(taskId) {
-    return fetch(`${config.API_ENDPOINT}/tasks/${taskId}`, {
+    return fetch(`${config.API_ENDPOINT}/preset-tasks/${taskId}`, {
       headers: {'Authorization': `bearer ${TokenServices.getAuthToken()}`},
     })
     .then(res => (
       (res.error) ? res.error : res.json()
     ))
   },
-  addTask(taskToAdd) {
-    return fetch(`${config.API_ENDPOINT}/tasks`, {
+  addPresetTask(taskToAdd) {
+    return fetch(`${config.API_ENDPOINT}/preset-tasks`, {
       method: 'POST',
       headers: {
         'Authorization': `bearer ${TokenServices.getAuthToken()}`,
@@ -31,8 +31,8 @@ const TaskServices = {
       (res.error) ? res.error : res.json()
     ))
   },
-  deleteTask(taskId) {
-    return fetch(`${config.API_ENDPOINT}/tasks/${taskId}`, {
+  deletePresetTask(taskId) {
+    return fetch(`${config.API_ENDPOINT}/preset-tasks/${taskId}`, {
       method: 'DELETE',
       headers: {'Authorization': `bearer ${TokenServices.getAuthToken()}`}
     })
@@ -40,8 +40,8 @@ const TaskServices = {
       (res.error) ? res.error : res.json()
     ))
   },
-  editTask(taskId, updatedTask) {
-    return fetch(`${config.API_ENDPOINT}/tasks/${taskId}`, {
+  editPresetTask(taskId, updatedTask) {
+    return fetch(`${config.API_ENDPOINT}/preset-tasks/${taskId}`, {
       method: 'PATCH',
       headers: {
         'Authorization': `bearer ${TokenServices.getAuthToken()}`,
@@ -55,4 +55,4 @@ const TaskServices = {
   }
 }
 
-export default TaskServices;
+export default PresetTaskServices;

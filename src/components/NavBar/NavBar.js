@@ -14,7 +14,7 @@ export default class NavBar extends React.Component {
     return (
       <nav className="navbar">
         <Link to="/dashboard">Dashboard</Link>
-        <Link onClick={() => this.handleLogout()}>Logout</Link>
+        <Link to="/" onClick={() => this.handleLogout()}>Logout</Link>
         <Link to="/settings">Account</Link>
       </nav>
     )

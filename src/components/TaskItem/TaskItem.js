@@ -1,12 +1,13 @@
 import React from 'react';
 import './TaskItem.css';
 import StateContext from '../Utils/StateContext';
+import { Link } from 'react-router-dom'
 
 export default class TaskItem extends React.Component {
   static contextType = StateContext;
 
   render() {
-    const { handleDeleteTask, handleEditTask } = this.context
+    const { handleDeleteTask } = this.context
     const { task, hours, minutes, date } = this.props
     return (
       <li>
@@ -15,7 +16,14 @@ export default class TaskItem extends React.Component {
         <p>{task.description}</p>
         <p>{date}</p>
         <button onClick={() => handleDeleteTask(this.props.id)} >Delete</button>
-        <button onClick={() => handleEditTask(this.props.id)}>Edit</button>
+        <Link to={{
+          pathname: '/task/edit',
+          state: {
+            id: this.props.id
+          }
+        }}>
+          <button>Edit</button>
+        </Link>
       </li>
     )
   }

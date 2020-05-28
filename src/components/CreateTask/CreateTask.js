@@ -5,9 +5,8 @@ import TaskServices from '../../services/task-services';
 export default class CreateTask extends React.Component {
   state = {
     task_name: '',
-    duration: null,
-    hours: '',
-    minutes: '',
+    hours: 0,
+    minutes: 30,
     task_date: null,
     error: null
   }
@@ -23,8 +22,8 @@ export default class CreateTask extends React.Component {
         this.setState({
           task_name: '',
           duration: null,
-          hours: '',
-          minutes: '',
+          hours: 0,
+          minutes: 30,
           task_date: null,
           error: null
         })
@@ -34,7 +33,7 @@ export default class CreateTask extends React.Component {
   }
 
   render() {
-    const { error } = this.state
+    const { hours, minutes, error } = this.state
     return (
       <section className="create-task-container">
         <header>
@@ -45,9 +44,9 @@ export default class CreateTask extends React.Component {
           <label htmlFor="task_name">Task Name</label>
           <input type="text" name="task_name" id="task_name" required onChange={ev => this.setState({ task_name: ev.target.value })} />
           <label htmlFor="hours">Hours</label>
-          <input type="number" name="hours" id="hours" min="0" max="24" required onChange={ev => this.setState({ hours: ev.target.value })} />
+          <input type="number" name="hours" id="hours" min="0" max="24" value={hours} required onChange={ev => this.setState({ hours: ev.target.value })} />
           <label htmlFor="minutes">Minutes</label>
-          <input type="number" name="minutes" id="minutes" min="0" max="59" required onChange={ev => this.setState({ minutes: ev.target.value })} />
+          <input type="number" name="minutes" id="minutes" min="0" max="59" value={minutes} required onChange={ev => this.setState({ minutes: ev.target.value })} />
           <label htmlFor="description">Description</label>
           <textarea name="description" id="description" onChange={ev => this.setState({ description: ev.target.value })} />
           <label htmlFor="task_date">Task Date</label>

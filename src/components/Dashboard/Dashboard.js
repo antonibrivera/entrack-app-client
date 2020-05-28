@@ -38,10 +38,6 @@ export default class Dashboard extends React.Component {
     })
   }
 
-  handleEditTask(taskId) {
-    
-  }
-
   handleDeleteTask(taskId) {
     TaskServices.deleteTask(taskId)
       .then(res => {
@@ -54,10 +50,12 @@ export default class Dashboard extends React.Component {
     const { error } = this.state
     return (
       <StateContext.Provider value={{
-        handleDeleteTask: this.handleDeleteTask
+        handleDeleteTask: this.handleDeleteTask,
       }}>
         <div>
-          <Link to='/create-task'>Add Task</Link>
+          <Link to='/task/create'>
+            <button>Add Task</button>
+          </Link>
           { (error) && <p>{error}</p> }
           <ul>
             {this.generateTasksList()}
