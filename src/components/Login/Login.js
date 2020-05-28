@@ -22,9 +22,7 @@ export default class Login extends React.Component {
         this.setState({ username: '', password: '', error: null })
         this.props.history.push('/dashboard')
       })
-      .catch(res => {
-        this.setState({ error: res.error })
-      })
+      .catch(res => this.setState({ error: res.error }))
   }
 
   render() {
