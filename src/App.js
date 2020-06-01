@@ -12,25 +12,28 @@ import Settings from './components/Settings/Settings';
 import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './components/Utils/PrivateRoute';
 import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
+import ErrorHandler from './components/ErrorHandler/ErrorHandler';
 
 export default class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header>
-          <Route path='/' component={NavBar} />
-        </header>
-        <Switch>
-          <Route exact path='/' component={LandingPage}/>
-          <PublicOnlyRoute exact path='/login' component={Login} />
-          <PublicOnlyRoute exact path='/sign-up' component={SignUp} />
-          <PrivateRoute exact path='/settings' component={Settings} />
-          <PrivateRoute path='/dashboard' component={Dashboard} />
-          <PrivateRoute path='/task/create' component={CreateTask} />
-          <PrivateRoute path='/task/edit' component={EditTask} />
-          <PrivateRoute path='/preset/edit' component={EditPresetTask} />
-          <Route component={NotFound} />
-        </Switch>
+        <ErrorHandler>
+          <header>
+            <Route path='/' component={NavBar} />
+          </header>
+          <Switch>
+            <Route exact path='/' component={LandingPage}/>
+            <PublicOnlyRoute exact path='/login' component={Login} />
+            <PublicOnlyRoute exact path='/sign-up' component={SignUp} />
+            <PrivateRoute exact path='/settings' component={Settings} />
+            <PrivateRoute path='/dashboard' component={Dashboard} />
+            <PrivateRoute path='/task/create' component={CreateTask} />
+            <PrivateRoute path='/task/edit' component={EditTask} />
+            <PrivateRoute path='/preset/edit' component={EditPresetTask} />
+            <Route component={NotFound} />
+          </Switch>
+        </ErrorHandler>
       </div>
     );
   }

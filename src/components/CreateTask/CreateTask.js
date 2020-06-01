@@ -91,13 +91,13 @@ export default class CreateTask extends React.Component {
           <label htmlFor="hours">Hours</label>
           <input type="number" name="hours" id="hours" min="0" max="24" value={hours} required onChange={ev => this.setState({ hours: ev.target.value })} />
           <label htmlFor="minutes">Minutes</label>
-          <input type="number" name="minutes" id="minutes" min="0" max="59" value={minutes} required onChange={ev => this.setState({ minutes: ev.target.value })} />
+          <input type="number" name="minutes" id="minutes" min="1" max="59" value={minutes} required onChange={ev => this.setState({ minutes: ev.target.value })} />
           <label htmlFor="description">Description</label>
           <textarea name="description" id="description" onChange={ev => this.setState({ description: ev.target.value })} />
           <label htmlFor="new_task_date">Task Date</label>
           <input type="date" name="new_task_date" id="new_task_date" required onChange={ev => this.setState({ task_date: ev.target.value })} />
           <button onClick={ev => this.handleAddNewTask(ev)} disabled={!task_name || !hours || !minutes || !task_date}>Add Task</button>
-          <button onClick={ev => this.handleAddNewPresetTask(ev)} disabled={!task_name || !hours || !minutes || !task_date}>Create Preset</button>
+          <button onClick={ev => this.handleAddNewPresetTask(ev)} disabled={!task_name || !hours || !minutes }>Create Preset</button>
         </form>
         <button onClick={() => this.setState({ newTask: false })}>Go Back</button>
       </div>
@@ -117,6 +117,7 @@ export default class CreateTask extends React.Component {
   handleAddPresetTask(ev) {
     ev.preventDefault()
     const { presetTasks, presetId, task_date } = this.state
+    // eslint-disable-next-line
     const presetTask = presetTasks.find(task => task.id == presetId)
     const { task_name, description } = presetTask
     const hours = (!presetTask.duration.hours) ? 0 : presetTask.duration.hours
@@ -129,7 +130,7 @@ export default class CreateTask extends React.Component {
         this.setState({
           task_name: '',
           duration: null,
-          hours: 0,
+          hours: 1,
           minutes: 30,
           task_date: null,
           error: null
