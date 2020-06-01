@@ -55,7 +55,7 @@ export default class EditTask extends React.Component {
           description: '',
           error: null
         })
-        this.props.history.push('/dashboard')
+        this.props.history.goBack()
       })
       .catch(res => this.setState({ error: res.error }))
   }
@@ -65,7 +65,7 @@ export default class EditTask extends React.Component {
     return (
       <section className="create-task-container">
         <header>
-          <h2>Create a New Task</h2>
+          <h2>Edit your Preset Task</h2>
         </header>
         { error && <p>{error}</p> }
         <form onSubmit={ev => this.handleEditPresetTask(ev)}>
