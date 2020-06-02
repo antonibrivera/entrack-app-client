@@ -9,7 +9,7 @@ export default class EditTask extends React.Component {
     hours: '',
     minutes: '',
     description: '',
-    task_date: null,
+    task_date: '',
     error: null
   }
 
@@ -57,7 +57,7 @@ export default class EditTask extends React.Component {
           hours: '',
           minutes: '',
           description: '',
-          task_date: null,
+          task_date: '',
           error: null
         })
         this.props.history.push('/dashboard')
@@ -69,26 +69,28 @@ export default class EditTask extends React.Component {
     const { task_name, hours, minutes, description, task_date, error } = this.state
     return (
       <section className="create-task-container">
-        <header>
-          <h2>Edit Your Task</h2>
-        </header>
-        { error && <p>{error}</p> }
-        <form onSubmit={ev => this.handleEditTask(ev)}>
-          <label htmlFor="task_name">Task Name</label>
-          <input type="text" name="task_name" id="task_name" required value={task_name} onChange={ev => this.setState({ task_name: ev.target.value })} />
-          <label htmlFor="hours">Hours</label>
-          <input type="number" name="hours" id="hours" min="0" max="24" required value={hours} onChange={ev => this.setState({ hours: ev.target.value })} />
-          <label htmlFor="minutes">Minutes</label>
-          <input type="number" name="minutes" id="minutes" min="0" max="59" required value={minutes} onChange={ev => this.setState({ minutes: ev.target.value })} />
-          <label htmlFor="description">Description</label>
-          <textarea name="description" id="description" value={description} onChange={ev => this.setState({ description: ev.target.value })} />
-          <label htmlFor="task_date">Task Date</label>
-          <input type="date" name="task_date" id="task_date" required value={task_date} onChange={ev => this.setState({ task_date: ev.target.value })} />
-          <button type="submit">Update Task</button>
-        </form>
-        <Link to='/dashboard'>
-          <button>Go Back</button>
-        </Link>
+        <div className="container">
+          <header>
+            <h2>Edit Your Task</h2>
+          </header>
+          { error && <p>{error}</p> }
+          <form onSubmit={ev => this.handleEditTask(ev)} className="edit-task-form">
+            <label htmlFor="task-name">Task Name</label>
+            <input type="text" name="task-name" id="task-name" required value={task_name} onChange={ev => this.setState({ task_name: ev.target.value })} />
+            <label htmlFor="hours">Hours</label>
+            <input type="number" name="hours" id="hours" min="0" max="24" required value={hours} onChange={ev => this.setState({ hours: ev.target.value })} />
+            <label htmlFor="minutes">Minutes</label>
+            <input type="number" name="minutes" id="minutes" min="0" max="59" required value={minutes} onChange={ev => this.setState({ minutes: ev.target.value })} />
+            <label htmlFor="description">Description</label>
+            <textarea name="description" id="description" value={description} onChange={ev => this.setState({ description: ev.target.value })} />
+            <label htmlFor="task-date">Task Date</label>
+            <input type="date" name="task-date" id="task-date" required value={task_date} onChange={ev => this.setState({ task_date: ev.target.value })} />
+            <button type="submit">Update Task</button>
+          </form>
+          <Link to='/dashboard'>
+            <button>Go Back</button>
+          </Link>
+        </div>
       </section>
     )
   }

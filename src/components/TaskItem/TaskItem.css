@@ -1,3 +1,59 @@
-li {
-  text-decoration: none;
+.task-item {
+  border: 1px solid black;
+  margin: 20px auto;
+  border-radius: 10px;
+  width: 80%;
+  vertical-align: middle;
+  display: block;
+
+}
+
+.task-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  margin: 0;
+  padding: 20px 10px 10px;
+  background-color: #008DB8;
+  color: #ADECFF;
+  border-radius: 10px 10px 0 0;
+}
+
+.duration {
+  margin: 0;
+  padding: 8px 5px;
+  background-color: #004E66;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.description {
+  padding: 0 15px;
+}
+
+.date {
+  padding: 0px 5px;
+}
+
+.task-item button {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 1.15rem;
+  padding: 5px 10px;
+  margin: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0081A7;
+  color: #FDFCDC;
+}
+
+.task-item button:hover {
+  cursor: pointer;
+  background-color: #00AFB9;
+}
+
+@media screen and (min-width: 750px) {
+  .task-item {
+    width: 700px;
+  }
 }

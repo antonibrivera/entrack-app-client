@@ -10,11 +10,11 @@ export default class TaskItem extends React.Component {
     const { handleDeleteTask } = this.context
     const { task, hours, minutes, date } = this.props
     return (
-      <li>
-        <h3>{task.task_name}</h3>
-        <p>{hours} hours and {minutes} minutes</p>
-        <p>{task.description}</p>
-        <p>{date}</p>
+      <div className="task-item">
+        <h3 className="task-name">{task.task_name}</h3>
+        <p className="duration">{hours} hours and {minutes} minutes</p>
+        <p className="description">{task.description}</p>
+        <p className="date">{date}</p>
         <button onClick={() => handleDeleteTask(this.props.id)} >Delete</button>
         <Link to={{
           pathname: '/task/edit',
@@ -24,7 +24,7 @@ export default class TaskItem extends React.Component {
         }}>
           <button>Edit</button>
         </Link>
-      </li>
+      </div>
     )
   }
 }

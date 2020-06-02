@@ -37,12 +37,12 @@ export default class CreateTask extends React.Component {
   }
 
   generatePresetOptions() {
-    const { task_date, presetTasks } = this.state
+    const { task_date, presetTasks, presetId } = this.state
     if (presetTasks.length === 0) {
       return (
-        <div>
+        <div className="container">
           <header>
-            <h2>You don't have any Preset Tasks</h2>
+            <h2 className="no-preset-warning">You don't have any Preset Tasks</h2>
           </header>
           <button className="create-task-btn" onClick={() => this.setState({ newTask: true })}>Create New Task</button>
         </div>
@@ -54,23 +54,24 @@ export default class CreateTask extends React.Component {
           <h2>Choose a Preset Task</h2>
         </header>
         <form className="preset-task-form">
-          <select name="presetId" onChange={ev => this.setState({ presetId: ev.target.value })}>
+          <label htmlFor="preset-task">Preset Task</label>
+          <select name="presetId" id="preset-task" onChange={ev => this.setState({ presetId: ev.target.value })}>
             <option value='' hidden>Select a Preset</option>
             {presetTasks.map(task => {
               return <PresetOption key={task.id} id={task.id} task_name={task.task_name} duration={task.duration} genPreview={this.generateDurationPreview} />
             })}
           </select>
-          <label htmlFor="preset_task_date">Task Date</label>
-          <input type="date" name="preset_task_date" id="preset_task_date" required onChange={ev => this.setState({ task_date: ev.target.value })} />
-          <button onClick={ev => this.handleAddPresetTask(ev)} disabled={!task_date || !presetTasks}>Add Task</button>
-          <button onClick={ev => this.handleDeletePresetTask(ev)} disabled={presetTasks.length === 0}>Delete Preset</button>
+          <label htmlFor="preset-task-date">Task Date</label>
+          <input type="date" name="preset-task-date" id="preset-task-date" required onChange={ev => this.setState({ task_date: ev.target.value })} />
+          <button className="preset-options-btn" onClick={ev => this.handleAddPresetTask(ev)} disabled={!task_date || !presetTasks}>Add Task</button>
+          <button className="preset-options-btn" onClick={ev => this.handleDeletePresetTask(ev)} disabled={!presetId}>Delete Preset</button>
           <Link to={{
             pathname: '/preset/edit',
             state: {
               id: this.state.presetId
             }
           }}>
-            <button>Edit Preset</button>
+            <button className="preset-options-btn" disabled={!presetId}>Edit Preset</button>
           </Link>
         </form>
         <button className="create-task-btn" onClick={() => this.setState({ newTask: true })}>Create New Task</button>
@@ -81,21 +82,21 @@ export default class CreateTask extends React.Component {
   generateNewTask() {
     const { task_name, hours, minutes, task_date } = this.state
     return (
-      <div>
+      <div className="container">
         <header>
           <h2>Create a New Task</h2>
         </header>
         <form className="new-task-form">
-          <label htmlFor="task_name">Task Name</label>
-          <input type="text" name="task_name" id="task_name" required onChange={ev => this.setState({ task_name: ev.target.value })} />
+          <label htmlFor="task-name">Task Name</label>
+          <input type="text" name="task-name" id="task-name" required onChange={ev => this.setState({ task_name: ev.target.value })} />
           <label htmlFor="hours">Hours</label>
           <input type="number" name="hours" id="hours" min="0" max="24" value={hours} required onChange={ev => this.setState({ hours: ev.target.value })} />
           <label htmlFor="minutes">Minutes</label>
           <input type="number" name="minutes" id="minutes" min="1" max="59" value={minutes} required onChange={ev => this.setState({ minutes: ev.target.value })} />
           <label htmlFor="description">Description</label>
           <textarea name="description" id="description" onChange={ev => this.setState({ description: ev.target.value })} />
-          <label htmlFor="new_task_date">Task Date</label>
-          <input type="date" name="new_task_date" id="new_task_date" required onChange={ev => this.setState({ task_date: ev.target.value })} />
+          <label htmlFor="new-task-date">Task Date</label>
+          <input type="date" name="new-task-date" id="new-task-date" required onChange={ev => this.setState({ task_date: ev.target.value })} />
           <button onClick={ev => this.handleAddNewTask(ev)} disabled={!task_name || !hours || !minutes || !task_date}>Add Task</button>
           <button onClick={ev => this.handleAddNewPresetTask(ev)} disabled={!task_name || !hours || !minutes }>Create Preset</button>
         </form>

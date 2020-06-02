@@ -8,7 +8,6 @@ import EditTask from './components/EditTask/EditTask';
 import EditPresetTask from './components/EditPresetTask/EditPresetTask';
 import LandingPage from './components/LandingPage/LandingPage';
 import NotFound from './components/NotFound/NotFound';
-import Settings from './components/Settings/Settings';
 import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './components/Utils/PrivateRoute';
 import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
@@ -26,7 +25,6 @@ export default class App extends React.Component {
             <Route exact path='/' component={LandingPage}/>
             <PublicOnlyRoute exact path='/login' component={Login} />
             <PublicOnlyRoute exact path='/sign-up' component={SignUp} />
-            <PrivateRoute exact path='/settings' component={Settings} />
             <PrivateRoute path='/dashboard' component={Dashboard} />
             <PrivateRoute path='/task/create' component={CreateTask} />
             <PrivateRoute path='/task/edit' component={EditTask} />

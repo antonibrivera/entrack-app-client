@@ -1,0 +1,81 @@
+.create-task-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FDFCDC;
+}
+
+.create-task-container input,
+.create-task-container textarea,
+.create-task-container select {
+  display: block;
+}
+
+.container {
+  padding: 40px 20px;
+  margin: 30px 10px;
+  border: 1px solid #0081A7;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container label {
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.container input,
+.container select {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+}
+
+.container button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin: 5px 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0081A7;
+  color: #FDFCDC;
+}
+
+.container button:hover {
+  cursor: pointer;
+  background-color: #00AFB9;
+}
+
+.container button:disabled,
+.container button[disabled] {
+  background-color: lightgray;
+  color: black;
+}
+
+/* Preset Options Styling */
+
+.edit-preset-form button {
+  align-self: center;
+}
+
+.edit-preset-form {
+  width: 90%;
+}
+
+/* Create New Task Styling */
+
+.container #task-name,
+.container #hours,
+.container #minutes,
+.container #description {
+  border: 1px solid lightgray;
+  margin: 10px 0;
+}

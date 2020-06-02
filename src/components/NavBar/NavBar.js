@@ -15,7 +15,6 @@ export default class NavBar extends React.Component {
       <nav className="navbar">
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/" onClick={() => this.handleLogout()}>Logout</Link>
-        <Link to="/settings">Account</Link>
       </nav>
     )
   }
@@ -23,9 +22,9 @@ export default class NavBar extends React.Component {
   renderLoggedOutNav() {
     return (
       <nav className="navbar">
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
         <Link to="/sign-up">Sign Up</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/">Home</Link>
       </nav>
     )
   }

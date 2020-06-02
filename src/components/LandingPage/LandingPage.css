@@ -1,0 +1,118 @@
+.landing-page-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Main Styling */
+
+.hero-main {
+  width: 100vw;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('https://i.ibb.co/6FCxZZF/woman-using-laptop.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+}
+
+.hero-main header {
+  text-align: center;
+  margin-bottom: 60px;
+  color: #FFFFFF;
+}
+
+.hero-main h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+}
+
+.login-btn {
+  margin-bottom: 100px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.15rem;
+  font-weight: bold;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0081A7;
+  color: #FDFCDC;
+}
+
+.login-btn:hover {
+  cursor: pointer;
+  background-color: #00AFB9;
+}
+
+/* Who Are We Styling */
+
+.who-are-we-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center ;
+  align-items: center;
+  padding: 40px;
+  background-color: #FDFCDC;
+}
+
+.who-are-we-section h2 {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Try Out Styling */
+
+.try-out-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.try-out-section header {
+  text-align: center;
+}
+
+.try-out-section h2 {
+  font-family: 'Poppins', sans-serif;
+}
+
+.demo-btn {
+  margin: 20px 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.15rem;
+  font-weight: bold;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 10px;
+  background-color: #0081A7;
+  color: #FDFCDC;
+}
+
+.demo-btn:hover {
+  cursor: pointer;
+  background-color: #00AFB9;
+}
+
+/* Footer Styles */
+
+.landing-page-container footer {
+  width: 100vw;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 1rem;
+  background-color: #0081A7;
+}
+
+@media screen and (min-width: 1024px) {
+  .who-are-we-section p,
+  .try-out-section p {
+    width: 700px;
+  }
+}

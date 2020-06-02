@@ -1,7 +1,6 @@
 import React from 'react';
 import './EditPresetTask.css';
 import PresetTaskServices from '../../services/preset-task-services';
-import { Link } from 'react-router-dom';
 
 export default class EditTask extends React.Component {
   state = {
@@ -25,11 +24,12 @@ export default class EditTask extends React.Component {
       .then(task => {
         const hours = (!task.duration.hours) ? 0 : task.duration.hours
         const minutes = (!task.duration.minutes) ? 0 : task.duration.minutes
+        const description = (!task.description) ? '' : task.description
         this.setState({
           task_name: task.task_name,
           hours: hours,
           minutes: minutes,
-          description: task.description,
+          description: description,
         })
       })
       .catch(res => this.setState({ error: res.error }))
@@ -64,24 +64,24 @@ export default class EditTask extends React.Component {
     const { task_name, hours, minutes, description, error } = this.state
     return (
       <section className="create-task-container">
-        <header>
-          <h2>Edit your Preset Task</h2>
-        </header>
-        { error && <p>{error}</p> }
-        <form onSubmit={ev => this.handleEditPresetTask(ev)}>
-          <label htmlFor="task_name">Task Name</label>
-          <input type="text" name="task_name" id="task_name" required value={task_name} onChange={ev => this.setState({ task_name: ev.target.value })} />
-          <label htmlFor="hours">Hours</label>
-          <input type="number" name="hours" id="hours" min="0" max="24" required value={hours} onChange={ev => this.setState({ hours: ev.target.value })} />
-          <label htmlFor="minutes">Minutes</label>
-          <input type="number" name="minutes" id="minutes" min="0" max="59" required value={minutes} onChange={ev => this.setState({ minutes: ev.target.value })} />
-          <label htmlFor="description">Description</label>
-          <textarea name="description" id="description" value={description} onChange={ev => this.setState({ description: ev.target.value })} />
-          <button type="submit">Update Task</button>
-        </form>
-        <Link to='/dashboard'>
-          <button>Go Back</button>
-        </Link>
+        <div className="container">
+          <header>
+            <h2>Edit your Preset Task</h2>
+          </header>
+          { error && <p>{error}</p> }
+          <form onSubmit={ev => this.handleEditPresetTask(ev)} className="edit-preset-form">
+            <label htmlFor="task-name">Task Name</label>
+            <input type="text" name="task-name" id="task-name" required value={task_name} onChange={ev => this.setState({ task_name: ev.target.value })} />
+            <label htmlFor="hours">Hours</label>
+            <input type="number" name="hours" id="hours" min="0" max="24" required value={hours} onChange={ev => this.setState({ hours: ev.target.value })} />
+            <label htmlFor="minutes">Minutes</label>
+            <input type="number" name="minutes" id="minutes" min="0" max="59" required value={minutes} onChange={ev => this.setState({ minutes: ev.target.value })} />
+            <label htmlFor="description">Description</label>
+            <textarea name="description" id="description" value={description} onChange={ev => this.setState({ description: ev.target.value })} />
+            <button type="submit">Update Task</button>
+          </form>
+          <button onClick={() => this.props.history.goBack()}>Go Back</button>
+        </div>
       </section>
     )
   }
