@@ -9,20 +9,20 @@ Link to API repo: https://github.com/antonibrivera/entrack-app-server
 The API itself runs on the root endpoint as follows: https://secret-cove-63111.herokuapp.com/
 There are 3 main paths to interact with. The '/tasks' and '/preset-tasks' routes are the routes to interact with to get set tasks that are left to complete along with preset tasks to choose from to set as a task. The '/auth' route is made to interact with the user through authentication.
 
-Making a GET request on the 'tasks' routes will return a list of tasks.
+- Making a GET request on the 'tasks' routes will return a list of tasks.
 
-Making a GET request to a '/(tasks)/:id' route will return an individual task.
+- Making a GET request to a '/(tasks)/:id' route will return an individual task.
 
-A POST request on the 'tasks' routes will add a new task to the database.
+- A POST request on the 'tasks' routes will add a new task to the database.
 
-Making a PATCH request to a '/(task)/:id' route will update the task with the given ID.
+- Making a PATCH request to a '/(task)/:id' route will update the task with the given ID.
 
-Finally, a DELETE request to a '/(task)/:id' route will delete the given task.
+- Finally, a DELETE request to a '/(task)/:id' route will delete the given task.
 
 
-A POST request to '/auth/login' will return a JSON Web Token to be stored in the user's browser for authentication.
+- A POST request to '/auth/login' will return a JSON Web Token to be stored in the user's browser for authentication.
 
-A GET request to '/auth/user' will return the current user's first and last name to be used in the greeting on the dashboard.
+- A GET request to '/auth/user' will return the current user's first and last name to be used in the greeting on the dashboard.
 
 All of the '/tasks' and '/preset-tasks' routes are protected endpoints, so a user must be logged in to their own account to access any information from the database.
 
