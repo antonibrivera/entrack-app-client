@@ -1,68 +1,42 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## EnTrack App
 
-## Available Scripts
+Link to live site: https://entrack-app.now.sh/
+Link to API repo: https://github.com/antonibrivera/entrack-app-server
 
-In the project directory, you can run:
+## How to Use the API
 
-### `npm start`
+The API itself runs on the root endpoint as follows: https://secret-cove-63111.herokuapp.com/
+There are 3 main paths to interact with. The '/tasks' and '/preset-tasks' routes are the routes to interact with to get set tasks that are left to complete along with preset tasks to choose from to set as a task. The '/auth' route is made to interact with the user through authentication.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Making a GET request on the 'tasks' routes will return a list of tasks.
+Making a GET request to a '/(tasks)/:id' route will return an individual task.
+A POST request on the 'tasks' routes will add a new task to the database.
+Making a PATCH request to a '/(task)/:id' route will update the task with the given ID.
+Finally, a DELETE request to a '/(task)/:id' route will delete the given task.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+A POST request to '/auth/login' will return a JSON Web Token to be stored in the user's browser for authentication.
+A GET request to '/auth/user' will return the current user's first and last name to be used in the greeting on the dashboard.
 
-### `npm test`
+All of the '/tasks' and '/preset-tasks' routes are protected endpoints, so a user must be logged in to their own account to access any information from the database.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Screenshots
 
-### `npm run build`
+![EnTrack_App5](https://user-images.githubusercontent.com/26678591/83586650-04b6a480-a51b-11ea-80fb-090167b4dc77.png)
+![EnTrack_App3](https://user-images.githubusercontent.com/26678591/83586664-113afd00-a51b-11ea-9428-90a97d0f9056.png)
+![EnTrack_App1](https://user-images.githubusercontent.com/26678591/83586568-d5079c80-a51a-11ea-8193-7051473b68da.png)
+![EnTrack_App2](https://user-images.githubusercontent.com/26678591/83586589-e2bd2200-a51a-11ea-9edb-dbee3fa4380a.png)
+![EnTrack_App4](https://user-images.githubusercontent.com/26678591/83586684-1f891900-a51b-11ea-963c-7efb91a037e6.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Summary
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+EnTrack was made to help business owners and entrepreneurs keep track of the time they have to work. Part of owning your own business is making your own schedule, but it's not always easy to know exactly how many hours of work you need to put in. With EnTrack, you can create tasks and give them a total amount of time it takes to complete it. You can also create new or select from a list of preset tasks you know you always have to get done. Instead of typing in the same task every time, you can pick a task and it's date to get done. Each day you'll get a summary of the total hours to work for that day and you can filter your list of tasks to today's tasks or all your tasks.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Technologies Used
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- HTML/JSX
+- CSS
+- JavaScript
+- React.js
+- Node.js
+- Express.js
+- PostgreSQL
