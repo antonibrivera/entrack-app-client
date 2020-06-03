@@ -59,7 +59,7 @@ export default class Dashboard extends React.Component {
     })
     time.hours += Math.floor(time.minutes / 60)
     time.minutes = time.minutes % 60
-
+    
     return time
   }
 

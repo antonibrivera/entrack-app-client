@@ -63,7 +63,7 @@ export default class CreateTask extends React.Component {
           </select>
           <label htmlFor="preset-task-date">Task Date</label>
           <input type="date" name="preset-task-date" id="preset-task-date" required onChange={ev => this.setState({ task_date: ev.target.value })} />
-          <button className="preset-options-btn" onClick={ev => this.handleAddPresetTask(ev)} disabled={!task_date || !presetTasks}>Add Task</button>
+          <button className="preset-options-btn" onClick={ev => this.handleAddPresetTask(ev)} disabled={!task_date || !presetId}>Add Task</button>
           <button className="preset-options-btn" onClick={ev => this.handleDeletePresetTask(ev)} disabled={!presetId}>Delete Preset</button>
           <Link to={{
             pathname: '/preset/edit',

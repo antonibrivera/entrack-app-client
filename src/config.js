@@ -1,4 +1,4 @@
 export default {
-  API_ENDPOINT: process.env.API_ENDPOINT || 'http://localhost:8080',
-  TOKEN_KEY: process.env.TOKEN_KEY || 'entrack-client-auth-token',
+  API_ENDPOINT: process.env.REACT_APP_API_ENPOINT || 'https://secret-cove-63111.herokuapp.com',
+  TOKEN_KEY: process.env.REACT_APP_TOKEN_KEY || 'entrack-client-auth-token',
 }
