@@ -154,9 +154,9 @@ export default class Dashboard extends React.Component {
           <div className="today-header">
             <h2>{new Date().toDateString()}.</h2>
             <p>Hey there {first_name}! You have {this.generateWorkHoursText()} Good luck and have a great day!</p>
-            <Link to='/task/create'>
+            <a href='/task/create'>
               <button className="add-task-btn">Add New Task</button>
-            </Link>
+            </a>
           </div>
           <div className="filter-view">
             <button onClick={() => this.setState({ filterTasks: true })}>View Today</button>

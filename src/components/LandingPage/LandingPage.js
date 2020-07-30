@@ -1,6 +1,5 @@
 import React from 'react';
 import './LandingPage.css';
-import { Link } from 'react-router-dom';
 
 export default class LandingPage extends React.Component {
   render() {
@@ -11,9 +10,9 @@ export default class LandingPage extends React.Component {
             <h1>EnTrack</h1>
             <p>Take control of your time</p>
           </header>
-          <Link to='/login'>
+          <a href='/login'>
             <button className="login-btn">Login</button>
-          </Link>
+          </a>
         </main>
         <section className="who-are-we-section">
           <header>
@@ -30,9 +29,9 @@ export default class LandingPage extends React.Component {
             <h2>Want to give us a go?</h2>
             <p>Click the demo button below and follow the instructions on the page to sign in.</p>
           </header>
-          <Link to='/login'>
+          <a href='/login'>
             <button className="demo-btn">Start Demo</button>
-          </Link>
+          </a>
         </section>
         <footer>
           <h3>Made with <span role="img" aria-label="heart emoji">❤️</span> in Miami</h3>

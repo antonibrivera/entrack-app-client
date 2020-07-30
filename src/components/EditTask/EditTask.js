@@ -87,9 +87,9 @@ export default class EditTask extends React.Component {
             <input type="date" name="task-date" id="task-date" required value={task_date} onChange={ev => this.setState({ task_date: ev.target.value })} />
             <button type="submit">Update Task</button>
           </form>
-          <Link to='/dashboard'>
+          <a href='/dashboard'>
             <button>Go Back</button>
-          </Link>
+          </a>
         </div>
       </section>
     )

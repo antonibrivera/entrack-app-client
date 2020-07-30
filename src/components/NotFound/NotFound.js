@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 export default class NotFound extends React.Component {
   userButton() {
-    if (TokenServices.hasAuthToken()) return <Link to='/dashboard'><button className="user-btn">Go to Dashboard</button></Link>
-    else return <Link to='/'><button className="user-btn">Go Home</button></Link>
+    if (TokenServices.hasAuthToken()) return <a href='/dashboard'><button className="user-btn">Go to Dashboard</button></a>
+    else return <a href='/'><button className="user-btn">Go Home</button></a>
   }
 
   render() {
